@@ -1,0 +1,52 @@
+{
+  "kind": "collectionType",
+  "collectionName": "usuarios",
+  "info": {
+    "singularName": "usuario",
+    "pluralName": "usuarios",
+    "displayName": "Usuario",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombres": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "apellidos": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "direccion": {
+      "type": "string",
+      "required": true,
+      "maxLength": 150
+    },
+    "telefono": {
+      "type": "string",
+      "required": true,
+      "maxLength": 15
+    },
+    "tipo_rol": {
+      "type": "string",
+      "default": "usuario",
+      "required": true,
+      "maxLength": 20
+    },
+    "fechaNacimiento": {
+      "type": "date",
+      "required": true
+    },
+    "user_id": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "usuario"
+    }
+  }
+}

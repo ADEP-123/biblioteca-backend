@@ -770,37 +770,15 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    nombres: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 100;
-      }>;
-    apellidos: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 100;
-      }>;
-    direccion: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 150;
-      }>;
-    relefono: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 15;
-      }>;
-    tipo_rol: Attribute.String &
-      Attribute.Required &
-      Attribute.SetMinMaxLength<{
-        maxLength: 20;
-      }> &
-      Attribute.DefaultTo<'usuario'>;
-    fecha_nacimiento: Attribute.Date & Attribute.Required;
     prestamos: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToMany',
       'api::prestamo.prestamo'
+    >;
+    usuario: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::usuario.usuario'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1195,6 +1173,68 @@ export interface ApiPuntoTrabajoPuntoTrabajo extends Schema.CollectionType {
   };
 }
 
+export interface ApiUsuarioUsuario extends Schema.CollectionType {
+  collectionName: 'usuarios';
+  info: {
+    singularName: 'usuario';
+    pluralName: 'usuarios';
+    displayName: 'Usuario';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombres: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    apellidos: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    direccion: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 150;
+      }>;
+    telefono: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 15;
+      }>;
+    tipo_rol: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }> &
+      Attribute.DefaultTo<'usuario'>;
+    fechaNacimiento: Attribute.Date & Attribute.Required;
+    user_id: Attribute.Relation<
+      'api::usuario.usuario',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::usuario.usuario',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::usuario.usuario',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -1221,6 +1261,7 @@ declare module '@strapi/types' {
       'api::libro-localidad.libro-localidad': ApiLibroLocalidadLibroLocalidad;
       'api::prestamo.prestamo': ApiPrestamoPrestamo;
       'api::punto-trabajo.punto-trabajo': ApiPuntoTrabajoPuntoTrabajo;
+      'api::usuario.usuario': ApiUsuarioUsuario;
     }
   }
 }

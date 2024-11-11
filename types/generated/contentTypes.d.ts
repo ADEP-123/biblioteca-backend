@@ -742,7 +742,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &
@@ -771,6 +770,38 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    nombres: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    apellidos: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    direccion: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 150;
+      }>;
+    relefono: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 15;
+      }>;
+    tipo_rol: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 20;
+      }> &
+      Attribute.DefaultTo<'usuario'>;
+    fecha_nacimiento: Attribute.Date & Attribute.Required;
+    prestamos: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::prestamo.prestamo'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -781,6 +812,382 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'plugin::users-permissions.user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiAutorAutor extends Schema.CollectionType {
+  collectionName: 'autors';
+  info: {
+    singularName: 'autor';
+    pluralName: 'autors';
+    displayName: 'Autor';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    apellido: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    nacionalidad: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    libros: Attribute.Relation<
+      'api::autor.autor',
+      'manyToMany',
+      'api::libro.libro'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::autor.autor',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::autor.autor',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBibliotecarioBibliotecario extends Schema.CollectionType {
+  collectionName: 'bibliotecarios';
+  info: {
+    singularName: 'bibliotecario';
+    pluralName: 'bibliotecarios';
+    displayName: 'Bibliotecario';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::bibliotecario.bibliotecario',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    punto_trabajo: Attribute.Relation<
+      'api::bibliotecario.bibliotecario',
+      'manyToOne',
+      'api::punto-trabajo.punto-trabajo'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::bibliotecario.bibliotecario',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::bibliotecario.bibliotecario',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoriaCategoria extends Schema.CollectionType {
+  collectionName: 'categorias';
+  info: {
+    singularName: 'categoria';
+    pluralName: 'categorias';
+    displayName: 'Categoria';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::categoria.categoria',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::categoria.categoria',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiEditorialEditorial extends Schema.CollectionType {
+  collectionName: 'editorials';
+  info: {
+    singularName: 'editorial';
+    pluralName: 'editorials';
+    displayName: 'Editorial';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    nacionalidad: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 50;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::editorial.editorial',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::editorial.editorial',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLibroLibro extends Schema.CollectionType {
+  collectionName: 'libros';
+  info: {
+    singularName: 'libro';
+    pluralName: 'libros';
+    displayName: 'Libro';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    isbn: Attribute.UID;
+    titulo: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    editorial: Attribute.Relation<
+      'api::libro.libro',
+      'oneToOne',
+      'api::editorial.editorial'
+    >;
+    idioma: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 50;
+      }>;
+    edicion: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 30;
+      }>;
+    categoria: Attribute.Relation<
+      'api::libro.libro',
+      'oneToOne',
+      'api::categoria.categoria'
+    >;
+    resumen: Attribute.Text;
+    autors: Attribute.Relation<
+      'api::libro.libro',
+      'manyToMany',
+      'api::autor.autor'
+    >;
+    libro_localidads: Attribute.Relation<
+      'api::libro.libro',
+      'oneToMany',
+      'api::libro-localidad.libro-localidad'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::libro.libro',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::libro.libro',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLibroLocalidadLibroLocalidad extends Schema.CollectionType {
+  collectionName: 'libro_localidads';
+  info: {
+    singularName: 'libro-localidad';
+    pluralName: 'libro-localidads';
+    displayName: 'libro_localidad';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    id_localidad: Attribute.Relation<
+      'api::libro-localidad.libro-localidad',
+      'manyToOne',
+      'api::punto-trabajo.punto-trabajo'
+    >;
+    id_libro: Attribute.Relation<
+      'api::libro-localidad.libro-localidad',
+      'manyToOne',
+      'api::libro.libro'
+    >;
+    numero_inventario: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 100;
+      }>;
+    estado: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 10;
+      }>;
+    coste_dia: Attribute.BigInteger & Attribute.Required;
+    prestamos: Attribute.Relation<
+      'api::libro-localidad.libro-localidad',
+      'oneToMany',
+      'api::prestamo.prestamo'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::libro-localidad.libro-localidad',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::libro-localidad.libro-localidad',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPrestamoPrestamo extends Schema.CollectionType {
+  collectionName: 'prestamos';
+  info: {
+    singularName: 'prestamo';
+    pluralName: 'prestamos';
+    displayName: 'prestamo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    id_libro_local: Attribute.Relation<
+      'api::prestamo.prestamo',
+      'manyToOne',
+      'api::libro-localidad.libro-localidad'
+    >;
+    id_user: Attribute.Relation<
+      'api::prestamo.prestamo',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    fecha_inicio: Attribute.DateTime & Attribute.Required;
+    fecha_pac_dev: Attribute.DateTime & Attribute.Required;
+    fecha_fin_dev: Attribute.DateTime;
+    valor_pactado_dia: Attribute.BigInteger & Attribute.Required;
+    valor_total_cierre: Attribute.BigInteger;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::prestamo.prestamo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::prestamo.prestamo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPuntoTrabajoPuntoTrabajo extends Schema.CollectionType {
+  collectionName: 'punto_trabajos';
+  info: {
+    singularName: 'punto-trabajo';
+    pluralName: 'punto-trabajos';
+    displayName: 'punto-trabajo';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nombre: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetMinMaxLength<{
+        maxLength: 150;
+      }>;
+    direccion: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 200;
+      }>;
+    libro_localidads: Attribute.Relation<
+      'api::punto-trabajo.punto-trabajo',
+      'oneToMany',
+      'api::libro-localidad.libro-localidad'
+    >;
+    bibliotecarios: Attribute.Relation<
+      'api::punto-trabajo.punto-trabajo',
+      'oneToMany',
+      'api::bibliotecario.bibliotecario'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::punto-trabajo.punto-trabajo',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::punto-trabajo.punto-trabajo',
       'oneToOne',
       'admin::user'
     > &
@@ -806,6 +1213,14 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::autor.autor': ApiAutorAutor;
+      'api::bibliotecario.bibliotecario': ApiBibliotecarioBibliotecario;
+      'api::categoria.categoria': ApiCategoriaCategoria;
+      'api::editorial.editorial': ApiEditorialEditorial;
+      'api::libro.libro': ApiLibroLibro;
+      'api::libro-localidad.libro-localidad': ApiLibroLocalidadLibroLocalidad;
+      'api::prestamo.prestamo': ApiPrestamoPrestamo;
+      'api::punto-trabajo.punto-trabajo': ApiPuntoTrabajoPuntoTrabajo;
     }
   }
 }

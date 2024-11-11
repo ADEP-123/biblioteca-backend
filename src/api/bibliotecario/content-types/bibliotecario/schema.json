@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "bibliotecarios",
+  "info": {
+    "singularName": "bibliotecario",
+    "pluralName": "bibliotecarios",
+    "displayName": "Bibliotecario"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    },
+    "punto_trabajo": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::punto-trabajo.punto-trabajo",
+      "inversedBy": "bibliotecarios"
+    }
+  }
+}

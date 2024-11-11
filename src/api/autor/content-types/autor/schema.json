@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "autors",
+  "info": {
+    "singularName": "autor",
+    "pluralName": "autors",
+    "displayName": "Autor"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "apellido": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "nacionalidad": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "libros": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::libro.libro",
+      "mappedBy": "autors"
+    }
+  }
+}

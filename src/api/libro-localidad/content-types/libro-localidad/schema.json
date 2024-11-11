@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "libro_localidads",
+  "info": {
+    "singularName": "libro-localidad",
+    "pluralName": "libro-localidads",
+    "displayName": "libro_localidad"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "id_localidad": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::punto-trabajo.punto-trabajo",
+      "inversedBy": "libro_localidads"
+    },
+    "id_libro": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::libro.libro",
+      "inversedBy": "libro_localidads"
+    },
+    "numero_inventario": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "estado": {
+      "type": "string",
+      "required": true,
+      "maxLength": 10
+    },
+    "coste_dia": {
+      "type": "biginteger",
+      "required": true
+    },
+    "prestamos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::prestamo.prestamo",
+      "mappedBy": "id_libro_local"
+    }
+  }
+}

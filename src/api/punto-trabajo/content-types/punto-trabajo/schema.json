@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "punto_trabajos",
+  "info": {
+    "singularName": "punto-trabajo",
+    "pluralName": "punto-trabajos",
+    "displayName": "punto-trabajo"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nombre": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 150
+    },
+    "direccion": {
+      "type": "string",
+      "required": true,
+      "maxLength": 200
+    },
+    "libro_localidads": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::libro-localidad.libro-localidad",
+      "mappedBy": "id_localidad"
+    },
+    "bibliotecarios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::bibliotecario.bibliotecario",
+      "mappedBy": "punto_trabajo"
+    }
+  }
+}

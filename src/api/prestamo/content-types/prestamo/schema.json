@@ -1,0 +1,45 @@
+{
+  "kind": "collectionType",
+  "collectionName": "prestamos",
+  "info": {
+    "singularName": "prestamo",
+    "pluralName": "prestamos",
+    "displayName": "prestamo"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "id_libro_local": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::libro-localidad.libro-localidad",
+      "inversedBy": "prestamos"
+    },
+    "id_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "prestamos"
+    },
+    "fecha_inicio": {
+      "type": "datetime",
+      "required": true
+    },
+    "fecha_pac_dev": {
+      "type": "datetime",
+      "required": true
+    },
+    "fecha_fin_dev": {
+      "type": "datetime"
+    },
+    "valor_pactado_dia": {
+      "type": "biginteger",
+      "required": true
+    },
+    "valor_total_cierre": {
+      "type": "biginteger"
+    }
+  }
+}

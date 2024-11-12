@@ -964,12 +964,13 @@ export interface ApiLibroLibro extends Schema.CollectionType {
     singularName: 'libro';
     pluralName: 'libros';
     displayName: 'Libro';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    isbn: Attribute.UID;
+    isbn: Attribute.UID & Attribute.Required;
     titulo: Attribute.String &
       Attribute.Required &
       Attribute.SetMinMaxLength<{

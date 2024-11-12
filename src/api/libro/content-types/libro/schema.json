@@ -4,7 +4,8 @@
   "info": {
     "singularName": "libro",
     "pluralName": "libros",
-    "displayName": "Libro"
+    "displayName": "Libro",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "isbn": {
-      "type": "uid"
+      "type": "uid",
+      "required": true
     },
     "titulo": {
       "type": "string",

@@ -1,61 +1,75 @@
-# 🚀 Getting started with Strapi
+# Sistema de Gestión de Biblioteca
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+Este proyecto tiene como objetivo desarrollar un sistema para la gestión de bibliotecas, que permita la administración eficiente de inventarios de libros, el manejo de préstamos, devoluciones, reservas, y la autenticación de usuarios con diferentes roles (administradores, bibliotecarios, y usuarios finales). El presente repositorio corresponde al backend de la aplicacion el frontend lo encontrara en el siguiente link:
+https://github.com/emilynievesb/biblioteca-frontend
 
-### `develop`
+## Integrantes del Proyecto
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+- **Andrés David Elizalde Peralta**
+- **Emily Julieth Nieves Badillo**
+- **Santiago Alexander Ospina Pabon**
 
-```
-npm run develop
-# or
-yarn develop
-```
+## Docente
 
-### `start`
+- **Nury Farelo Velasquez**
 
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
+## Instalacion
 
-```
-npm run start
-# or
-yarn start
-```
+### Clonar y eliminar manualmente la garpeta .git
 
-### `build`
+Para realizar este paso debe tener permisos de administrador en su dispotivo y tener habilitada la opcion de ver carpetas ocultas
 
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
+1. Clone el repositorio con el siguiente comando:
 
-```
-npm run build
-# or
-yarn build
+```bash
+git clone https://github.com/ADEP-123/biblioteca-backend
 ```
 
-## ⚙️ Deployment
+2. Busque la carpeta oculta `.git` dentro de la carpeta raiz del proyecto `biblioteca-backend` y eliminela
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+## Cómo instalar las dependencias
 
+Para esto debe estar seguro de tener instalado Node en una version 18.18.0 o superior, para ello ejecute el siguiente comando en consola:
+
+```bash
+node --version
 ```
-yarn strapi deploy
+
+si obtiene un mensaje diciendo que no se reconoce ese comando debe instalar node, para ello puede acceder al siguiente link:
+https://nodejs.org/en/download/package-manager
+
+Una vez instalado node ejecute el siguiente comando
+
+```bash
+npm install
 ```
 
-## 📚 Learn more
+## Como iniciar el servicio
 
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
+1. En la carpeta raiz cree un archivo `.env`.
+2. Dentro del archivo `.env` debe declarar varias variables que se muestran acontinuacion:
 
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
+```bash
+# Server
+HOST=0.0.0.0
+PORT=1337
 
-## ✨ Community
+# Secrets
+APP_KEYS=
+API_TOKEN_SALT=
+ADMIN_JWT_SECRET=
+TRANSFER_TOKEN_SALT=
 
-- [Discord](https://discord.strapi.io) - Come chat with the Strapi community including the core team.
-- [Forum](https://forum.strapi.io/) - Place to discuss, ask questions and find answers, show your Strapi project and get feedback or just talk with other Community members.
-- [Awesome Strapi](https://github.com/strapi/awesome-strapi) - A curated list of awesome things related to Strapi.
+DATABASE_CLIENT="postgres"
+DATABASE_URL="postgresql://bibliotecadb_lwy6_user:tz4kk5X1yaWIApnE5M7XXJT2EW4cMUSt@dpg-csonjaij1k6c73akq6qg-a.oregon-postgres.render.com/bibliotecadb_lwy6?ssl=true"
+DATABASE_POOL_MIN=0
+DATABASE_POOL_MAX=10
+JWT_SECRET=
+```
+Debe rellenar caada una de las variables que no tienen valor segun los datos de su aplicacion
 
----
+3. Inicie el servidor con el siguiente comando:
 
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+```bash
+npm run dev
+```

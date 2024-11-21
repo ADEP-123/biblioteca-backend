@@ -18,10 +18,10 @@
       "target": "api::libro.libro",
       "inversedBy": "prestamos"
     },
-    "id_user": {
+    "usuario": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "plugin::users-permissions.user",
+      "target": "api::usuario.usuario",
       "inversedBy": "prestamos"
     },
     "fecha_inicio": {

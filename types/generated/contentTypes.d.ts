@@ -770,11 +770,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
-    prestamos: Attribute.Relation<
-      'plugin::users-permissions.user',
-      'oneToMany',
-      'api::prestamo.prestamo'
-    >;
     usuario: Attribute.Relation<
       'plugin::users-permissions.user',
       'oneToOne',
@@ -1097,10 +1092,10 @@ export interface ApiPrestamoPrestamo extends Schema.CollectionType {
       'manyToOne',
       'api::libro.libro'
     >;
-    id_user: Attribute.Relation<
+    usuario: Attribute.Relation<
       'api::prestamo.prestamo',
       'manyToOne',
-      'plugin::users-permissions.user'
+      'api::usuario.usuario'
     >;
     fecha_inicio: Attribute.DateTime & Attribute.Required;
     fecha_pac_dev: Attribute.DateTime & Attribute.Required;
@@ -1218,6 +1213,11 @@ export interface ApiUsuarioUsuario extends Schema.CollectionType {
       'api::usuario.usuario',
       'oneToOne',
       'plugin::users-permissions.user'
+    >;
+    prestamos: Attribute.Relation<
+      'api::usuario.usuario',
+      'oneToMany',
+      'api::prestamo.prestamo'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;

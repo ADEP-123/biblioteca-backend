@@ -65,12 +65,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "prestamos": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::prestamo.prestamo",
-      "mappedBy": "id_user"
-    },
     "usuario": {
       "type": "relation",
       "relation": "oneToOne",

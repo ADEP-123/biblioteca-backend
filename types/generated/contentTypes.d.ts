@@ -1007,6 +1007,11 @@ export interface ApiLibroLibro extends Schema.CollectionType {
       'oneToMany',
       'api::libro-localidad.libro-localidad'
     >;
+    prestamos: Attribute.Relation<
+      'api::libro.libro',
+      'oneToMany',
+      'api::prestamo.prestamo'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1057,11 +1062,6 @@ export interface ApiLibroLocalidadLibroLocalidad extends Schema.CollectionType {
         maxLength: 10;
       }>;
     coste_dia: Attribute.BigInteger & Attribute.Required;
-    prestamos: Attribute.Relation<
-      'api::libro-localidad.libro-localidad',
-      'oneToMany',
-      'api::prestamo.prestamo'
-    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1086,15 +1086,16 @@ export interface ApiPrestamoPrestamo extends Schema.CollectionType {
     singularName: 'prestamo';
     pluralName: 'prestamos';
     displayName: 'prestamo';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    id_libro_local: Attribute.Relation<
+    libro: Attribute.Relation<
       'api::prestamo.prestamo',
       'manyToOne',
-      'api::libro-localidad.libro-localidad'
+      'api::libro.libro'
     >;
     id_user: Attribute.Relation<
       'api::prestamo.prestamo',

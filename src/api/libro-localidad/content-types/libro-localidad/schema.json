@@ -36,12 +36,6 @@
     "coste_dia": {
       "type": "biginteger",
       "required": true
-    },
-    "prestamos": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::prestamo.prestamo",
-      "mappedBy": "id_libro_local"
     }
   }
 }

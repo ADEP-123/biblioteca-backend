@@ -55,6 +55,12 @@
       "relation": "oneToMany",
       "target": "api::libro-localidad.libro-localidad",
       "mappedBy": "id_libro"
+    },
+    "prestamos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::prestamo.prestamo",
+      "mappedBy": "libro"
     }
   }
 }
